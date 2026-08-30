@@ -1,4 +1,4 @@
-import { Post } from '../sanity/query';
+import { Post, SanityImage } from '../sanity/query';
 import { PortableText } from 'next-sanity';
 import { urlFor } from '../sanity/sanityImgUrl';
 import Image from 'next/image';
@@ -59,10 +59,10 @@ export const Work = ({ data }: { data: Post }) => {
                         </div>
                     </div>
                 </div>
-                {data.gallery?.images && (
+                {data.gallery && data.gallery.length > 0 && (
                     <div className="flex flex-col gap-4">
-                        {data.gallery.images.map((g, index) => (
-                            <div key={g._key ?? index} className="">
+                        {data.gallery.map((g: SanityImage, index: number) => (
+                            <div key={index} className="">
                                 <Image
                                     src={urlFor(g).url()}
                                     alt={g.alt ?? ''}

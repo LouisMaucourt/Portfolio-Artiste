@@ -1,7 +1,7 @@
 import type { PortableTextBlock } from "next-sanity";
 
 export const options = {
-  next: { revalidate: 0 },
+  next: { revalidate: 30 },
 };
 
 export type SanityImage = {
