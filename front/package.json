@@ -12,6 +12,7 @@
     "@gsap/react": "^2.1.2",
     "@sanity/image-url": "^2.1.1",
     "@tailwindcss/typography": "^0.5.20",
+    "biome": "^0.3.3",
     "gsap": "^3.15.0",
     "lucide-react": "^1.31.0",
     "next": "16.3.1",

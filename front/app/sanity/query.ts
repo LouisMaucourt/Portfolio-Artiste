@@ -25,19 +25,18 @@ export type TextImage = {
 };
 
 export type Post = {
-  _id: string;
-  title: string;
-  slug: string;
-  image: SanityImage;
-  _createdAt: string;
-  date: string;
-  size: string;
-  material: PortableTextBlock[];
-  exposition: PortableTextBlock[];
-  description: PortableTextBlock[];
-  gallery: SanityImage[];
+	_id: string;
+	title: string;
+	slug: string;
+	image: SanityImage;
+	_createdAt: string;
+	date: string;
+	size: string;
+	material: PortableTextBlock[];
+	exposition: PortableTextBlock[];
+	description: PortableTextBlock[];
+	gallery?: { images?: SanityImage[] };
 };
-
 export type CV = {
   _id: string;
   title: string;

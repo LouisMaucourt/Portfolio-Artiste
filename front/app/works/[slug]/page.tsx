@@ -11,6 +11,7 @@ export default async function Page({
     const { slug } = await params
     const post = await client.fetch(WORK_QUERY, { slug })
     if (!post) return notFound()
+        console.log(post)
     return(
     <>
         <Work data={post} />

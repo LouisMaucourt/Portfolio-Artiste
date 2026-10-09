@@ -1,17 +1,14 @@
 import { defineField, defineType } from 'sanity'
 import { imageGalleryType } from '../objects/imageGallery';
+import { orderRankField } from '@sanity/orderable-document-list';
+
 
 export const projectType = defineType({
     name: 'post',
     title: 'Oeuvre',
     type: 'document',
     fields: [
-        defineField({
-            name: 'orderRank',
-            type: 'string',
-            hidden: true,
-        }),
-
+ orderRankField({ type: 'post' }),
         defineField({
             name: 'hero',
             type: 'hero',
@@ -20,22 +17,25 @@ export const projectType = defineType({
         defineField({
             name: 'date',
             type: 'date',
+            title:"Date de réalisation",
             options: {
                 dateFormat: 'DD-MM-YYYY',
             }
         }),
         defineField({
-            name: 'size',
+            name: 'Taille',
             type: 'string',
         }),
 
         defineField({
             name: 'material',
+            title:"Matériaux",
             type: 'array',
             of: [{ type: 'block' }],
         }),
         defineField({
             name: 'exposition',
+            title:"Lieu d'exposition",
             type: 'array',
             of: [{ type: 'block' }],
         }),
@@ -49,7 +49,7 @@ export const projectType = defineType({
     preview: {
         select: {
             title: 'hero.heading',
-            media: 'hero.img',
+            media: 'hero.image',
         },
     },
 })
