@@ -5,6 +5,7 @@ export const options = {
 };
 
 export type SanityImage = {
+  _key: string;
   _type: "image";
   alt?: string;
   asset: {
