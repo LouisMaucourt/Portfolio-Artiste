@@ -21,8 +21,10 @@ export const titleText = defineType({
                         defineField({
                             name: 'text',
                             title: 'Texte',
-                            type: 'text',
+                            type: 'array',
+                            of: [{ type: 'block' }],
                         }),
+                        
                     ],
                 }),
             ],

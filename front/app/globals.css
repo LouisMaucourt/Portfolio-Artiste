@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
+/* ---------- Variables ---------- */
 :root {
 	--font-sans: var(--font-neue);
 	--white: #ededed;
 	--foreground: #171717;
 	--background: #ffffff;
-	/* --red:#EB1D1B; */
+	--black: #000000;
 	--red: #1b1b1b;
 }
 
@@ -13,6 +14,17 @@
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-neue);
+	--ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+	background-color: var(--white);
+	color: var(--foreground);
+	font-family: var(--font-neue), sans-serif;
+}
+
+body {
+	font-family: var(--font-neue), sans-serif;
 }
 
 a,
@@ -21,12 +33,20 @@ li {
 	list-style-type: none;
 }
 
-body {
-	background: var(--background);
-	color: var(--foreground);
-	font-family: var(--font-neue), sans-serif;
+/* ---------- Typo ---------- */
+.preloader-text {
+	font-size: calc(80vw / 12);
+	white-space: nowrap;
+	line-height: 1;
 }
 
+.logo {
+	font-size: calc(20vw / 7);
+	white-space: nowrap;
+	line-height: 1;
+}
+
+/* ---------- View transitions ---------- */
 ::view-transition-group(.morph) {
 	animation-duration: 350ms;
 }
@@ -41,19 +61,64 @@ body {
 	}
 }
 
-html,
-body {
-	background-color: var(--white);
-	font-family: var(--font-neue), sans-serif;
+@supports (animation-timeline: scroll()) {
+	.scroll-fade {
+		animation: fade-out linear both;
+		animation-timeline: scroll(root);
+		animation-range: 0 350px;
+	}
+	.scroll-img {
+		animation: reveal linear both;
+		animation-timeline: view();
+		animation-range: entry 0% entry 60%;
+	}
+
+	html {
+		timeline-scope: --gallery;
+	}
+
+	html:has(.gallery) {
+		animation: to-dark linear both, to-light linear forwards;
+		animation-timeline: --gallery, --gallery;
+		animation-range: entry 0% entry 70%, exit 70% exit 110%;
+	}
+
+	.gallery {
+		view-timeline: --gallery block;
+	}
 }
 
-.preloader-text {
-	font-size: calc(100vw / 12);
-	white-space: nowrap;
-	line-height: 1;
+@keyframes fade-out {
+	to {
+		opacity: 0.06;
+	}
 }
-.logo {
-	font-size: calc(20vw / 7);
-	white-space: nowrap;
-	line-height: 1;
+
+@keyframes reveal {
+	from {
+		opacity: 0;
+		transform: translateY(40px);
+	}
+}
+
+@keyframes to-dark {
+	from {
+		background-color: var(--white);
+		color: var(--foreground);
+	}
+	to {
+		background-color: var(--black);
+		color: #fff;
+	}
+}
+
+@keyframes to-light {
+	from {
+		background-color: var(--black);
+		color: #fff;
+	}
+	to {
+		background-color: var(--white);
+		color: var(--foreground);
+	}
 }

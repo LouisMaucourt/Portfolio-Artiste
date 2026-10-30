@@ -23,7 +23,8 @@ export const projectType = defineType({
             }
         }),
         defineField({
-            name: 'Taille',
+            name: 'size',
+            title:"Taille",
             type: 'string',
         }),
 

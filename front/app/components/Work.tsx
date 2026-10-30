@@ -1,79 +1,137 @@
-import type { Post, SanityImage } from "../sanity/query";
 import { PortableText } from "next-sanity";
-import { urlFor } from "../sanity/sanityImgUrl";
 import Image from "next/image";
 import { ViewTransition } from "react";
-import { SubLabel } from "@/components/ui/SubLabel";
+import type { Post } from "../sanity/query";
+import { urlFor } from "../sanity/sanityImgUrl";
+import { TextFullScreen } from "./ui/TextFullScreen";
+import { ArrowDown } from "lucide-react";
 
-export const Work = ({ data }: { data: Post }) => {
+type NextWork = {
+	title: string;
+	slug: string;
+};
+
+export const Work = ({
+	data,
+	nextWork,
+}: {
+	data: Post;
+	nextWork: NextWork | null;
+}) => {
+	const exposition = data?.exposition;
+	const images = data.gallery?.images?.filter((g) => g.asset) ?? [];
+
 	return (
-		<div>
-			{data.image && (
-				<ViewTransition name={`work-${data._id}`} share="morph" default="none">
-					<Image
-						src={urlFor(data.image).url()}
-						alt={data.title ?? ""}
-						width={1920}
-						height={1080}
-						priority
-						className=" max-w-3/4 max-h-[90vh] object-left"
-					/>
-				</ViewTransition>
-			)}
-			<div className="flex flex-col md:gap-10 gap-12">
-				<div className="xl:my-20 my-10">
-					<h1 className="text-4xl uppercase font-medium mb-14">{data.title}</h1>
-					<div className="flex flex-col lg:gap-15 gap-10 uppercase">
-						<div>
-							<SubLabel>Description</SubLabel>
-							<PortableText value={data.description} />
-						</div>
-						<div className="grid grid-cols-2 lg:gap-15 gap-10">
-							{data.date && (
-								<div className="flex flex-col">
-									<SubLabel>Date</SubLabel>
-									<p>{data.date}</p>
-								</div>
-							)}
-							{data.size && (
-								<div className="flex flex-col">
-									<SubLabel>Taille</SubLabel>
-									<p>{data.size}</p>
-								</div>
-							)}
-							{data.material && (
-								<div className="flex flex-col">
-									<SubLabel className="uppercase text-xs">Matériaux</SubLabel>
-									<PortableText value={data.material} />
-								</div>
-							)}
-							{data.exposition && (
-								<div className="flex flex-col">
-									<SubLabel>Lieux d'exposition</SubLabel>
-									<PortableText value={data.exposition} />
-								</div>
-							)}
+		<>
+			<div className="flex flex-col gap-50">
+				<TextFullScreen>
+					<h2 className="scroll-fade text-6xl font-bold uppercase">
+						{data.title}
+					</h2>
+					<div
+						className="scroll-fade pointer-events-none fixed bottom-16 left-1/2 flex -translate-x-1/2"
+						aria-hidden="true"
+					>
+						<div
+							className="transition duration-1600 delay-1400 ease-expo
+						starting:translate-y-8 starting:opacity-0
+						motion-reduce:transition-none"
+						>
+							<ArrowDown
+								className="motion-safe:animate-bounce [animation-duration:2s] [animation-delay:3s]"
+								size={40}
+								strokeWidth={1.2}
+							/>
 						</div>
 					</div>
-				</div>
-
-				{data.gallery?.images?.some((g) => g.asset) && (
-					<div className="flex flex-col gap-4 max-w-3/4">
-						{data.gallery.images
-							.filter((g) => g.asset)
-							.map((g) => (
+				</TextFullScreen>
+				{images.length > 0 && (
+					<div className="gallery relative z-10 flex flex-col gap-28 mb-[30svh]">
+						{images.map((g) => (
+							<div key={g.asset._ref} className="scroll-img">
 								<Image
-									key={g._key}
 									src={urlFor(g).url()}
 									alt={g.alt ?? ""}
 									width={1920}
 									height={1080}
-									className="w-full"
+									className="mx-auto xl:max-w-3/4 max-h-[80svh] w-full object-contain"
 								/>
-							))}
+								<div className="mt-3 w-full ">
+									<h2 className="underline">{data.title}</h2>
+									<p>Photo : {g.credit}</p>
+								</div>
+							</div>
+						))}
 					</div>
 				)}
+				<section className="mx-auto flex h-svh w-full flex-col xl:max-w-3/4">
+					<PortableText value={data.description} />
+
+					<div
+						className={`mt-30 grid grid-cols-1 gap-7 xl:gap-10 pb-28${
+							exposition ? "lg:grid-cols-2" : ""
+						}`}
+					>
+						<div className="divide-y">
+							<h3 className="pb-6">Détails de l&apos;œuvre</h3>
+
+							{data.title && (
+								<div className="grid grid-cols-2 gap-4 pt-4 pb-7">
+									<div>Titre</div>
+									<h2>{data.title}</h2>
+								</div>
+							)}
+
+							{data.date && (
+								<div className="grid grid-cols-2 gap-4 pt-4 pb-7">
+									<div>Année</div>
+									<h2>{new Date(data.date).getFullYear()}</h2>
+								</div>
+							)}
+
+							{data.material && (
+								<div className="grid grid-cols-2 gap-4 pt-4 pb-7">
+									<div>Matériaux</div>
+									<div>
+										<PortableText value={data.material} />
+									</div>
+								</div>
+							)}
+
+							{data.size && (
+								<div className="grid grid-cols-2 gap-4 pt-4 pb-7">
+									<div>Taille</div>
+									<h2>{data.size}</h2>
+								</div>
+							)}
+						</div>
+
+						{exposition && (
+							<div className="divide-y">
+								<h3 className="pb-6">Exposition</h3>
+								<div className="grid grid-cols-2 gap-4 pt-4 pb-7">
+									<div>Lieu</div>
+									<PortableText value={data.exposition} />
+								</div>
+							</div>
+						)}
+					</div>
+				</section>
+				{nextWork && (
+					<a
+						href={`/works/${nextWork.slug}`}
+						className="mx-auto underline text-4xl mb-28"
+					>
+						<ViewTransition
+							share="morph"
+							default="none"
+							name={`work-${nextWork.slug}`}
+						>
+							Oeuvre suivante : {nextWork.title}{" "}
+						</ViewTransition>
+					</a>
+				)}
 			</div>
-		</div>
+		</>
 	);
 };

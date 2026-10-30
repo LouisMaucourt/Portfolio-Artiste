@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Link from "next/link";
-import MobileNav from "./components/MobileNav";
-import { SubLabel } from "./components/ui/SubLabel";
-import Preloader from "./components/Preloader";
+import NavBar from "./components/NavBar";
+import SmoothScrolling from "./components/SmoothScroll";
 
 const neue = localFont({
 	variable: "--font-neue",
@@ -70,10 +68,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
 		<html lang="fr" className={`${neue.className} h-full antialiased`}>
-			<body className="min-h-full flex flex-col xl:flex-row">
-				<div className="fixed inset-0  -z-10" />
-				<MobileNav />
-				<header className="hidden xl:block xl:w-1/5 h-full fixed min-h-screen  border-r text-black ">
+			<body className="min-h-full">
+				<NavBar />
+				{/* <header className="hidden h-full fixed min-h-screen  border-r-2 text-black ">
 					<nav className="flex flex-col justify-between h-full py-7 px-3">
 						<div>
 							<Link href={"/"}>
@@ -120,11 +117,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 							</Link>
 						</div>
 					</nav>
-				</header>
+				</header> */}
 
-				<main className="w-full xl:ml-[20%] xl:w-4/5 xl:p-7 p-2 pt-16 xl:pt-0 py-0 mb-3 xl:mt-7 mt-5">
-					<Preloader />
-					{children}
+				<main className="w-full h-full p-5 mt-10 xl:mt-0 ">
+					<SmoothScrolling>{children}</SmoothScrolling>
 				</main>
 			</body>
 		</html>

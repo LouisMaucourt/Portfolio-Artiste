@@ -16,9 +16,15 @@ export const imageGalleryType = defineType({
                         {
                             name: 'alt',
                             type: 'string',
-                            title: 'Alternative text',
+                            title: "Description de l'image courte",
+                        },
+                                             {
+                            name: 'credit',
+                            type: 'string',
+                            title: "Crédit de l'image",
                         },
                     ],
+                    
                 }),
             ],
             options: {

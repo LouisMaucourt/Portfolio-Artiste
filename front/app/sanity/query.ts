@@ -11,11 +11,12 @@ export type SanityImage = {
     _ref: string;
     _type: "reference";
   };
+  credit:string;
 };
 
 export type TitleText = {
   title: string;
-  text: string;
+  text: PortableTextBlock[];
 };
 
 export type TextImage = {
@@ -60,8 +61,15 @@ export const WORKS_QUERY = `*[
     "title": hero.heading,
     "slug": hero.slug.current,
     "image": hero.image,
+    description,
+    date
 }`;
-
+export const NEXT_WORK_QUERY = `*[
+	_type == "post"
+] | order(orderRank asc) {
+	"title": hero.heading,
+	"slug": hero.slug.current
+}`;
 export const WORK_QUERY = `*[
     _type == "post" &&
     hero.slug.current == $slug

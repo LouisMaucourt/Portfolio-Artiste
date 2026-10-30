@@ -13,8 +13,9 @@ export const cvType = defineType({
 
         defineField({
             name: 'titleTexts',
-            title: 'Blocs titre / texte',
+            title: 'Blocs titre et texte',
             type: 'titleText',
+            
         }),
     ],
 
