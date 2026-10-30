@@ -43,9 +43,15 @@ export const Works = ({ data }: { data: Post[] }) => {
 								<PortableText value={post.description} />
 							</div>
 							<p>{new Date(post.date).toLocaleDateString("fr-FR")}</p>
-							<h2 className="text-bold min-w-full xl:group-hover:underline underline">
-								{post.title}
-							</h2>
+							<ViewTransition
+								name={`work-${post.slug}`}
+								share="morph"
+								default="none"
+							>
+								<h2 className="text-bold min-w-full xl:group-hover:underline underline">
+									{post.title}
+								</h2>
+							</ViewTransition>
 						</div>
 					</Link>
 				</li>

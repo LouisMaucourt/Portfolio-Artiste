@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io" },
     ],
-    // ⚠️ uniquement en développement
     dangerouslyAllowLocalIP: process.env.NODE_ENV === "development",
   },
 };

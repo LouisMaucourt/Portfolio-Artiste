@@ -119,9 +119,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 					</nav>
 				</header> */}
 
-				<main className="w-full h-full p-5 mt-10 xl:mt-0 ">
-					<SmoothScrolling>{children}</SmoothScrolling>
-				</main>
+				<main className="w-full h-full p-5 mt-10 xl:mt-0 ">{children}</main>
 			</body>
 		</html>
 	);

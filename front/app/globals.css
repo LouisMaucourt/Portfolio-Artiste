@@ -46,18 +46,15 @@ li {
 	line-height: 1;
 }
 
-/* ---------- View transitions ---------- */
 ::view-transition-group(.morph) {
-	animation-duration: 350ms;
+	animation-duration: 400ms;
 }
-
 ::view-transition-image-pair(.morph) {
 	animation-name: via-blur;
 }
-
 @keyframes via-blur {
 	30% {
-		filter: blur(1px);
+		filter: blur(3px);
 	}
 }
 

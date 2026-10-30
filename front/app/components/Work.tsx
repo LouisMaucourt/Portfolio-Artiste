@@ -5,7 +5,7 @@ import type { Post } from "../sanity/query";
 import { urlFor } from "../sanity/sanityImgUrl";
 import { TextFullScreen } from "./ui/TextFullScreen";
 import { ArrowDown } from "lucide-react";
-import Link from "next/link";
+import { ScrollToTop } from "@/utlis/ScrollToTop";
 
 type NextWork = {
 	title: string;
@@ -26,9 +26,15 @@ export const Work = ({
 		<>
 			<div className="flex flex-col gap-50">
 				<TextFullScreen>
-					<h2 className="scroll-fade text-6xl font-bold uppercase">
-						{data.title}
-					</h2>
+					<ViewTransition
+						name={`work-${data.slug}`}
+						share="morph"
+						default="none"
+					>
+						<h2 className="scroll-fade text-6xl font-bold uppercase">
+							{data.title}
+						</h2>
+					</ViewTransition>
 					<div
 						className="scroll-fade pointer-events-none fixed bottom-16 left-1/2 flex -translate-x-1/2"
 						aria-hidden="true"
@@ -119,12 +125,12 @@ export const Work = ({
 					</div>
 				</section>
 				{nextWork && (
-					<Link
+					<a
 						href={`/works/${nextWork.slug}`}
 						className="mx-auto underline text-4xl mb-28"
 					>
 						Oeuvre suivante : {nextWork.title}{" "}
-					</Link>
+					</a>
 				)}
 			</div>
 		</>
