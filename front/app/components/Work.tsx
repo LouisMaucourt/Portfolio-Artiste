@@ -5,6 +5,7 @@ import type { Post } from "../sanity/query";
 import { urlFor } from "../sanity/sanityImgUrl";
 import { TextFullScreen } from "./ui/TextFullScreen";
 import { ArrowDown } from "lucide-react";
+import Link from "next/link";
 
 type NextWork = {
 	title: string;
@@ -118,18 +119,12 @@ export const Work = ({
 					</div>
 				</section>
 				{nextWork && (
-					<a
+					<Link
 						href={`/works/${nextWork.slug}`}
 						className="mx-auto underline text-4xl mb-28"
 					>
-						<ViewTransition
-							share="morph"
-							default="none"
-							name={`work-${nextWork.slug}`}
-						>
-							Oeuvre suivante : {nextWork.title}{" "}
-						</ViewTransition>
-					</a>
+						Oeuvre suivante : {nextWork.title}{" "}
+					</Link>
 				)}
 			</div>
 		</>
