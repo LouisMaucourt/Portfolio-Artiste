@@ -24,12 +24,9 @@ export const Works = ({ data }: { data: Post[] }) => {
 			{posts.map((post, i) => (
 				<li
 					key={post.slug}
-					className={`xl:my-24 w-full xl:max-w-2/3 scroll-img ${PLACEMENTS[i === 0 ? 0 : pick(post._id)]}`}
+					className={`xl:my-10 w-full xl:max-w-2/3 scroll-img ${PLACEMENTS[i === 0 ? 0 : pick(post._id)]}`}
 				>
-					<Link
-						href={`/works/${post.slug}`}
-						className="group block xl:pb-28 pb-2"
-					>
+					<Link href={`/works/${post.slug}`} className="group block  pb-2">
 						<div className="relative w-fit max-w-full flex flex-col gap-1">
 							<Image
 								src={urlFor(post?.image)?.url()}

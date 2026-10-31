@@ -12,12 +12,11 @@ const links = [
 
 export default function NavBar() {
 	const [open, setOpen] = useState(false);
-
 	const textColor = open ? "text-white" : "text-inherit";
 
 	return (
 		<div className="sticky top-4 z-50 w-full">
-			<div className="relative z-50 flex items-center justify-between px-5 transition-[opacity,translate] duration-1200 delay-2200 ease-expo starting:-translate-y-2 starting:opacity-0 motion-reduce:transition-none">
+			<div className="relative z-50 flex items-center justify-between px-5 transition-[opacity,translate] duration-1200 delay-800 ease-expo starting:-translate-y-2 starting:opacity-0 motion-reduce:transition-none">
 				<h1 className={`font-medium uppercase ${textColor}`}>
 					<Link href="/" onClick={() => setOpen(false)}>
 						Charlotte Maucourt

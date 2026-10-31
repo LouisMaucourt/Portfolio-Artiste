@@ -62,7 +62,7 @@ li {
 	.scroll-fade {
 		animation: fade-out linear both;
 		animation-timeline: scroll(root);
-		animation-range: 0 350px;
+		animation-range: 0 550px;
 	}
 	.scroll-img {
 		animation: reveal linear both;
@@ -94,7 +94,7 @@ li {
 @keyframes reveal {
 	from {
 		opacity: 0;
-		transform: translateY(40px);
+		transform: translateY(200px);
 	}
 }
 
